@@ -1,18 +1,12 @@
 package mancala.domain;
 
-enum Winner {
-    PLAYER1,
-    PLAYER2,
-    DRAW,
-    NOWINNER    
-}
+import java.util.*;
 
 public class Player{
     private boolean hasTurn;
     private Player opponent;
     private normalPit firstPit;
-    private kalahaPit playersKalahaPit = new kalahaPit(this);
-    public final Winner identifier;
+    private KalahaPit kalahaPit = new KalahaPit(this);
 
     public boolean getTurn() {
         return this.hasTurn;
@@ -28,21 +22,15 @@ public class Player{
         return this.opponent;
     }
 
-    public void setOpponent(){
-        this.opponent = new Player(false);
-        this.opponent.opponent = this;
-        this.opponent.playersKalahaPit.setRightNeighbour(this.firstPit);
+    public KalahaPit getKalahaPit() {
+        return this.kalahaPit;
     }
 
-    public kalahaPit getKalahaPit() {
-        return this.playersKalahaPit;
-    }
-
-    public int checkStonesInPit() {
+   private int checkStonesInPit() {
         int currentPlayerStonesInPit = 0;
         Pit currentPit = this.getFirstPit();
-        for (int i = 0; i < 5; i++) {
-            currentPlayerStonesInPit = currentPlayerStonesInPit + currentPit.getStones();
+        for (int i = 0; i < currentPit.getTotalNumberOfPits(); i++) {
+            currentPlayerStonesInPit += currentPit.getStones();
             currentPit = currentPit.getRightNeighbour();
         }
         return currentPlayerStonesInPit;
@@ -56,37 +44,49 @@ public class Player{
         } else{
             return false;
         }
-
     }
 
-    public Winner determineWinner() {
+    public normalPit getSpecificPit(int numberOfPit) { //Input should start at 1 with the first pit
+        normalPit currentPit = this.getFirstPit();
+        for (int i = 0; i < Math.min(numberOfPit - 1, currentPit.getTotalNumberOfPits() - 1); i++) {
+            currentPit = (normalPit) currentPit.getRightNeighbour();
+        }
+        return currentPit;
+    }
+
+    public Player[] determineWinner() {
+        Player[] returnPlayerArrray;
         if(!this.checkGameEnd()) {
-            return Winner.NOWINNER;
+             returnPlayerArrray = new Player[]{};
+             return returnPlayerArrray;
         } else {
             int thisPlayerScore = this.checkStonesInPit() + this.getKalahaPit().getStones();
             int otherPlayerScore = this.getOpponent().checkStonesInPit() + this.getOpponent().getKalahaPit().getStones();
             if (thisPlayerScore > otherPlayerScore) {
-                return this.identifier;
+                returnPlayerArrray = new Player[]{this};
+                return returnPlayerArrray;
             } else if( thisPlayerScore < otherPlayerScore) {
-                return this.opponent.identifier;
+                returnPlayerArrray = new Player[]{this.getOpponent()};
+                return returnPlayerArrray;
             } else{
-                return Winner.DRAW;
+                returnPlayerArrray = new Player[]{this,this.getOpponent()};
+                return returnPlayerArrray;
             }
 
         }
     }
 
-    public Player(boolean isFirstPlayer) {     
-        this.firstPit = new normalPit(0,this);   
-        if(isFirstPlayer) {
-            this.identifier= Winner.PLAYER1;
+    public Player(Player Opponent, normalPit firstPit) {
+        if (Objects.isNull(firstPit)) {
+            this.firstPit = new normalPit(0,this);
+        }  
+        this.hasTurn = false;    
+        if( Objects.isNull(Opponent)) {
             this.hasTurn = true;
-            this.setOpponent();
-            this.playersKalahaPit.setRightNeighbour(opponent.getFirstPit());            
-        } else {
-            this.identifier=Winner.PLAYER2;
-            this.hasTurn = false;
-        }        
+            Opponent = new Player(this,null);
+        }
+        this.opponent = Opponent;        
+        this.kalahaPit.setRightNeighbour(this.opponent.getFirstPit());                 
     }
 
     public void takeTurn(int input) {
@@ -96,21 +96,19 @@ public class Player{
             System.out.print("The game has ended.This is the result:");
             System.out.print(this.determineWinner());
         } else{
-            normalPit currentPit = this.getFirstPit();
-            for (int i = 0; i < Math.max(input-1,5); i++) {
-                currentPit = (normalPit) currentPit.getRightNeighbour();
-            }
-            currentPit.activate();
+            this.getSpecificPit(input).getChosen();
         }
     }
 
     public void takeTurn() {
         this.hasTurn = true;
-        this.opponent.setTurn(false);
+        this.opponent.setTurn(false);        
         if (this.checkGameEnd()) {
             System.out.print("The game has ended.This is the result:");
             System.out.print(this.determineWinner());
         }
+
+        // Ask for input. execute input. Example is in the function above, for which the choice is the input of the takeTurn function.
     }
 
 }

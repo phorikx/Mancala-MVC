@@ -1,14 +1,17 @@
 package mancala.domain;
 
 public class Pit {
-    private int stones;
-    private Player owner;
-    private Pit rightNeighbour;
+    
+    protected int stones;
+    protected Player owner;
+    protected Pit rightNeighbour;
 
-    public void setStones(int numberOfStones) {
-        this.stones = numberOfStones;
-        return;
+    protected final int numberOfPits = 6;
+
+    public int getTotalNumberOfPits () {
+        return numberOfPits;
     }
+
     public int getStones() {
         return this.stones;
     }
@@ -22,28 +25,20 @@ public class Pit {
          return;
         }
 
-    public void setOwner(Player player) {
-        this.owner = player;
-        return;
-    }
-
     public Player getOwner() {return this.owner;}
 
-   /* public void activate() {
-        System.out.print("Cannot activate a generic Pit");
-    }*/
 
     public void give(int numberOfStones) {
         this.stones += 1;
         if (numberOfStones > 1) {
             this.rightNeighbour.give(numberOfStones-1);
         } else{
-            if(this.getOwner().getTurn()) {
-                this.getOwner().getOpponent().takeTurn();
-            } else{
-                this.getOwner().takeTurn();
-            }
+            this.checkLast();
         }
+    }
+
+    public void checkLast() {
+        System.out.print("Should not be activated by regular Pit");
     }
     
 }
