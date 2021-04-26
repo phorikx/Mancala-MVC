@@ -2,8 +2,11 @@ package mancala.domain;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
+// Een normalePit creëert ook zijn eigen speler en zijn eigen buurmannen als hij wordt aangeroepen zonder eigenaar.
+// Het is echter handiger om een los spelerobject te creëeren, omdat die ook beurten moet uitvoeren waarna het gedrag van de Pits getest wordt.
 public class normalPitTest {
+
+    // Bij het creeëren van scenario's is de eerste Pit een 1.
     public static Player createScenario(int[] moveArray) {
         Player player = new Player(null,null);
         Player currentPlayer = player;
@@ -62,6 +65,7 @@ public class normalPitTest {
 
     @Test
     public void doesRobWhenEndPitIsEmpty () {
+        // Deze sequence van moves zorgt ervoor dat met zijn laatste zet speler 1 de tegenstander berooft.
         int[] moveArray = {3,5,1,1};
         Player player = createScenario(moveArray);
         assertEquals(player.getSpecificPit(5).getOpposite().getStones(),0);
@@ -69,6 +73,7 @@ public class normalPitTest {
 
     @Test
     public void emptiesItselfWhenRobbing () {
+        // Deze sequence van moves zorgt ervoor dat met zijn laatste zet speler 1 de tegenstander berooft.
         int[] moveArray = {3,5,1,1};
         Player player = createScenario(moveArray);
         assertEquals(player.getSpecificPit(5).getStones(),0);
@@ -76,6 +81,7 @@ public class normalPitTest {
 
     @Test
     public void addsCorrectAmountOfStonesToKalaha () {
+        // Deze sequence van moves zorgt ervoor dat met zijn laatste zet speler 1 de tegenstander berooft.
         int[] moveArray = {3,5,1,1};
         Player player = createScenario(moveArray);
         assertEquals(player.getKalahaPit().getStones(),9);

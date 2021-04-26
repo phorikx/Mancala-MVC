@@ -8,11 +8,24 @@ public class Player{
     private normalPit firstPit;
     private KalahaPit kalahaPit = new KalahaPit(this);
 
+    public Player(Player Opponent, normalPit firstPit) {
+        if (Objects.isNull(firstPit)) {
+            this.firstPit = new normalPit(0,this);
+        }  
+        this.hasTurn = false;    
+        if( Objects.isNull(Opponent)) {
+            this.hasTurn = true;
+            Opponent = new Player(this,null);
+        }
+        this.opponent = Opponent;        
+        this.kalahaPit.setRightNeighbour(this.opponent.getFirstPit());                 
+    }
+
     public boolean getTurn() {
         return this.hasTurn;
     }
 
-    public void setTurn(boolean hasTurn){this.hasTurn=hasTurn;} 
+    //public void setTurn(boolean hasTurn){this.hasTurn=hasTurn;} 
 
     public normalPit getFirstPit() {
         return firstPit;
@@ -74,24 +87,16 @@ public class Player{
             }
 
         }
-    }
+    } 
 
-    public Player(Player Opponent, normalPit firstPit) {
-        if (Objects.isNull(firstPit)) {
-            this.firstPit = new normalPit(0,this);
-        }  
-        this.hasTurn = false;    
-        if( Objects.isNull(Opponent)) {
-            this.hasTurn = true;
-            Opponent = new Player(this,null);
-        }
-        this.opponent = Opponent;        
-        this.kalahaPit.setRightNeighbour(this.opponent.getFirstPit());                 
-    }
+    // We hebben twee functies om een beurt te nemen. Eentje met input die we nu gebruiken als we een sequence 
+    // van moves willen testen, en een andere die nog niks uitvoert, maar theoretisch gezien wacht op input van buitenaf.
+    // We hebben ze allebei nodig, omdat we in dit geval soms wel een specifieke beurt willen laten uitvoeren, maar
+    // vaak ook de beurt aan een speler kunnen geven zonder meteen een input daarbij te geven
 
     public void takeTurn(int input) {
         this.hasTurn = true;
-        this.opponent.setTurn(false);
+        this.opponent.hasTurn = false;
         if (this.checkGameEnd()) {
             System.out.print("The game has ended.This is the result:");
             System.out.print(this.determineWinner());
@@ -102,7 +107,7 @@ public class Player{
 
     public void takeTurn() {
         this.hasTurn = true;
-        this.opponent.setTurn(false);        
+        this.opponent.hasTurn = false;        
         if (this.checkGameEnd()) {
             System.out.print("The game has ended.This is the result:");
             System.out.print(this.determineWinner());

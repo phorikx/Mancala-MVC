@@ -6,6 +6,7 @@ public class Pit {
     protected Player owner;
     protected Pit rightNeighbour;
 
+    // Uiteindelijk 
     protected final int numberOfPits = 6;
 
     public int getTotalNumberOfPits () {
@@ -33,11 +34,11 @@ public class Pit {
         if (numberOfStones > 1) {
             this.rightNeighbour.give(numberOfStones-1);
         } else{
-            this.checkLast();
+            this.checkIfLast();
         }
     }
 
-    public void checkLast() {
+    public void checkIfLast() {
         System.out.print("Should not be activated by regular Pit");
     }
     

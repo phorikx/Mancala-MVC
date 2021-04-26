@@ -51,7 +51,7 @@ public class normalPit extends Pit{
         }
     }
 
-    public void checkLast() {
+    public void checkIfLast() {
         if(this.getStones() == 1) {
             this.robOpposite();
         }

@@ -18,11 +18,9 @@ public class KalahaPit extends Pit{
         }
     }
 
-
-    public void checkLast() {
+    public void checkIfLast() {
         this.getOwner().takeTurn();
     }
-
 
     public void giveStolenStones(int numberOfStones) {
         this.stones += numberOfStones;
