@@ -1,4 +1,6 @@
-package mancala.domain;
+package mancala.domain.Pit;
+
+import mancala.domain.*;
 
 public class KalahaPit extends Pit{
     public KalahaPit (Player owner) {
@@ -18,6 +20,7 @@ public class KalahaPit extends Pit{
         }
     }
 
+    @Override
     public void checkIfLast() {
         this.getOwner().takeTurn();
     }

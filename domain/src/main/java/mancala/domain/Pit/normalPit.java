@@ -1,5 +1,7 @@
-package mancala.domain;
+package mancala.domain.Pit;
+
 import java.util.*;
+import mancala.domain.*;
 
 public class normalPit extends Pit{
     
@@ -51,6 +53,7 @@ public class normalPit extends Pit{
         }
     }
 
+    @Override
     public void checkIfLast() {
         if(this.getStones() == 1) {
             this.robOpposite();

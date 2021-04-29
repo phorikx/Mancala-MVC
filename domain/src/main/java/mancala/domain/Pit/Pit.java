@@ -1,5 +1,6 @@
-package mancala.domain;
+package mancala.domain.Pit;
 
+import mancala.domain.*;
 public class Pit {
     
     protected int stones;
@@ -38,6 +39,7 @@ public class Pit {
         }
     }
 
+    // Gets implemented by the two subclasses.
     public void checkIfLast() {
         System.out.print("Should not be activated by regular Pit");
     }

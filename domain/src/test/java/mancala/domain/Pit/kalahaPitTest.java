@@ -1,5 +1,6 @@
-package mancala.domain;
+package mancala.domain.Pit;
 
+import mancala.domain.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

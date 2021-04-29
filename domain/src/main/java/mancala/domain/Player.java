@@ -1,6 +1,7 @@
 package mancala.domain;
 
 import java.util.*;
+import mancala.domain.Pit.*;
 
 public class Player{
     private boolean hasTurn;
@@ -14,7 +15,7 @@ public class Player{
         }  
         this.hasTurn = false;    
         if( Objects.isNull(Opponent)) {
-            this.hasTurn = true;
+            this.hasTurn =true;
             Opponent = new Player(this,null);
         }
         this.opponent = Opponent;        
@@ -39,7 +40,7 @@ public class Player{
         return this.kalahaPit;
     }
 
-   private int checkStonesInPit() {
+   private int checkStonesInPits() {
         int currentPlayerStonesInPit = 0;
         Pit currentPit = this.getFirstPit();
         for (int i = 0; i < currentPit.getTotalNumberOfPits(); i++) {
@@ -50,9 +51,9 @@ public class Player{
     }
 
     public boolean checkGameEnd() {
-        if(this.checkStonesInPit() == 0) {
+        if(this.checkStonesInPits() == 0) {
             return true;
-        } else if(this.opponent.checkStonesInPit() == 0) {
+        } else if(this.opponent.checkStonesInPits() == 0) {
             return true;
         } else{
             return false;
@@ -73,8 +74,8 @@ public class Player{
              returnPlayerArrray = new Player[]{};
              return returnPlayerArrray;
         } else {
-            int thisPlayerScore = this.checkStonesInPit() + this.getKalahaPit().getStones();
-            int otherPlayerScore = this.getOpponent().checkStonesInPit() + this.getOpponent().getKalahaPit().getStones();
+            int thisPlayerScore = this.checkStonesInPits() + this.getKalahaPit().getStones();
+            int otherPlayerScore = this.getOpponent().checkStonesInPits() + this.getOpponent().getKalahaPit().getStones();
             if (thisPlayerScore > otherPlayerScore) {
                 returnPlayerArrray = new Player[]{this};
                 return returnPlayerArrray;
