@@ -47,7 +47,7 @@ public class PlayerTest {
         Player player = new Player(null,null);
         int numberOfNormalPits = 0;
         Pit currentPit = player.getFirstPit();
-        while(currentPit instanceof normalPit) {
+        while(currentPit instanceof NormalPit) {
             numberOfNormalPits++;
             currentPit = currentPit.getRightNeighbour();
         }
@@ -59,7 +59,7 @@ public class PlayerTest {
         Player player = new Player(null,null);
         int numberOfNormalPits = 0;
         Pit currentPit = player.getOpponent().getFirstPit();
-        while(currentPit instanceof normalPit) {
+        while(currentPit instanceof NormalPit) {
             numberOfNormalPits++;
             currentPit = currentPit.getRightNeighbour();
         }
@@ -71,7 +71,7 @@ public class PlayerTest {
     public void playerOwnsOwnPits () {
         Player player = new Player(null,null);
         Pit currentPit = player.getFirstPit();
-        while(currentPit instanceof normalPit) {
+        while(currentPit instanceof NormalPit) {
             assertEquals(currentPit.getOwner(), player);
             currentPit = currentPit.getRightNeighbour();
         }

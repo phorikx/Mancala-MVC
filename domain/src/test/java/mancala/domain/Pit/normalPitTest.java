@@ -23,14 +23,14 @@ public class normalPitTest {
     @Test
     public void newNormalPitHasFourStones() {
         Player player = new Player(null,null);
-        normalPit firstNormalPit = new normalPit(0, player);
+        NormalPit firstNormalPit = new NormalPit(0, player);
         assertEquals(firstNormalPit.getStones(),4);
     }
 
     @Test
     public void normalPitHasNoStonesAfterSelection () {
         Player player = new Player(null,null);
-        player.getFirstPit().getChosen();
+        player.getFirstPit().Choose();
         assertEquals(player.getFirstPit().getStones(),0);
     }
 
@@ -50,8 +50,8 @@ public class normalPitTest {
     @Test 
     public void firstPitOfOpponentIsOppositeLastPitPlayer () {
         Player player = new Player(null,null);
-        normalPit sixthPit = player.getSpecificPit(6);
-        sixthPit.getOpposite().getChosen();
+        NormalPit sixthPit = player.getSpecificPit(6);
+        sixthPit.getOpposite().Choose();
         assertEquals(player.getOpponent().getFirstPit().getStones(),0);
 
     }

@@ -21,7 +21,7 @@ public class KalahaPit extends Pit{
     }
 
     @Override
-    public void checkIfLast() {
+    public void executeWhenLastPit() {
         this.getOwner().takeTurn();
     }
 
@@ -29,4 +29,8 @@ public class KalahaPit extends Pit{
         this.stones += numberOfStones;
     }
     
+    // The following function should not be activated.
+    protected NormalPit getOpposite(int distanceToKalaha, boolean hasVisitedKalaha){
+        return rightNeighbour.getOpposite(distanceToKalaha, true);
+    } 
 }

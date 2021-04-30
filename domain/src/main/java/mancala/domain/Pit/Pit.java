@@ -27,7 +27,9 @@ public class Pit {
          return;
         }
 
-    public Player getOwner() {return this.owner;}
+    public Player getOwner() {
+        return this.owner;
+    }
 
 
     public void give(int numberOfStones) {
@@ -35,12 +37,16 @@ public class Pit {
         if (numberOfStones > 1) {
             this.rightNeighbour.give(numberOfStones-1);
         } else{
-            this.checkIfLast();
+            this.executeWhenLastPit();
         }
     }
 
+    protected NormalPit getOpposite(int distanceToKalaha, boolean hasVisitedKalaha) {
+        return (NormalPit) this.rightNeighbour;
+    }
+
     // Gets implemented by the two subclasses.
-    public void checkIfLast() {
+    public void executeWhenLastPit() {
         System.out.print("Should not be activated by regular Pit");
     }
     

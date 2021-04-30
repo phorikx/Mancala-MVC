@@ -6,12 +6,12 @@ import mancala.domain.Pit.*;
 public class Player{
     private boolean hasTurn;
     private Player opponent;
-    private normalPit firstPit;
+    private NormalPit firstPit;
     private KalahaPit kalahaPit = new KalahaPit(this);
 
-    public Player(Player Opponent, normalPit firstPit) {
+    public Player(Player Opponent, NormalPit firstPit) {
         if (Objects.isNull(firstPit)) {
-            this.firstPit = new normalPit(0,this);
+            this.firstPit = new NormalPit(0,this);
         }  
         this.hasTurn = false;    
         if( Objects.isNull(Opponent)) {
@@ -28,7 +28,7 @@ public class Player{
 
     //public void setTurn(boolean hasTurn){this.hasTurn=hasTurn;} 
 
-    public normalPit getFirstPit() {
+    public NormalPit getFirstPit() {
         return firstPit;
     }
 
@@ -60,10 +60,10 @@ public class Player{
         }
     }
 
-    public normalPit getSpecificPit(int numberOfPit) { //Input should start at 1 with the first pit
-        normalPit currentPit = this.getFirstPit();
+    public NormalPit getSpecificPit(int numberOfPit) { //Input should start at 1 with the first pit
+        NormalPit currentPit = this.getFirstPit();
         for (int i = 0; i < Math.min(numberOfPit - 1, currentPit.getTotalNumberOfPits() - 1); i++) {
-            currentPit = (normalPit) currentPit.getRightNeighbour();
+            currentPit = (NormalPit) currentPit.getRightNeighbour();
         }
         return currentPit;
     }
@@ -102,7 +102,7 @@ public class Player{
             System.out.print("The game has ended.This is the result:");
             System.out.print(this.determineWinner());
         } else{
-            this.getSpecificPit(input).getChosen();
+            this.getSpecificPit(input).Choose();
         }
     }
 

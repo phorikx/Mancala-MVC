@@ -3,24 +3,24 @@ package mancala.domain.Pit;
 import java.util.*;
 import mancala.domain.*;
 
-public class normalPit extends Pit{
+public class NormalPit extends Pit{
     
 
-    public normalPit(int howManyPitsBefore, Player owner) {
+    public NormalPit(int howManyPitsBefore, Player owner) {
         if (Objects.isNull(owner)) {
             this.owner = new Player(null, this);
         }
         this.stones = 4;
         this.owner = owner;
         if(howManyPitsBefore < numberOfPits-1) {            
-            normalPit rightNeighbour = new normalPit(howManyPitsBefore + 1,owner);
+            NormalPit rightNeighbour = new NormalPit(howManyPitsBefore + 1,owner);
             this.setRightNeighbour(rightNeighbour);
         } else{
             this.setRightNeighbour(owner.getKalahaPit());
         }
     }
 
-    public void getChosen() {
+    public void Choose() {
         if (this.stones == 0) {
             System.out.println("geen geldige keuze.");
             this.owner.takeTurn();
@@ -31,19 +31,19 @@ public class normalPit extends Pit{
         }        
     }
 
-    public normalPit getOpposite() {
-        Pit currentPit = this;
-        int distanceToKalaha = 0;
-        while (!(currentPit instanceof KalahaPit)) {
-            distanceToKalaha++;
-            currentPit = currentPit.getRightNeighbour();
-        }
-        while(distanceToKalaha > 0) {
-            currentPit = currentPit.getRightNeighbour();
-            distanceToKalaha--;
-        }
-        return (normalPit) currentPit;
+    public NormalPit getOpposite() {
+        return rightNeighbour.getOpposite(0,false);
     }
+
+    protected NormalPit getOpposite(int distanceToKalaha, boolean hasVisitedKalaha){
+        if (!hasVisitedKalaha) {
+            return rightNeighbour.getOpposite(distanceToKalaha+1, false);
+        }
+        if (distanceToKalaha == 0) {
+            return this;
+        }
+        return rightNeighbour.getOpposite(distanceToKalaha-1,true);
+    } 
 
     public void robOpposite() {
         if (this.getStones() == 1) {
@@ -54,7 +54,7 @@ public class normalPit extends Pit{
     }
 
     @Override
-    public void checkIfLast() {
+    public void executeWhenLastPit() {
         if(this.getStones() == 1) {
             this.robOpposite();
         }
