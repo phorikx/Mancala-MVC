@@ -1,12 +1,13 @@
 package mancala.domain;
+import mancala.domain.Pit.*;
 
-public class MancalaImpl implements Mancala {
-    public MancalaImpl() {
-        // Initialize the game here.
+public class PlayerImpl implements PlayerInterface {
+    public PlayerImpl() {
+        
     }
-
+/*
     @Override
-    public boolean isPlayersTurn(int player) {
+    public boolean isPlayersTurn( player) {
         return true;
     }
 
@@ -30,5 +31,5 @@ public class MancalaImpl implements Mancala {
 	@Override
 	public int getWinner() {
         return Mancala.NO_PLAYERS;
-    }
+    }*/
 }

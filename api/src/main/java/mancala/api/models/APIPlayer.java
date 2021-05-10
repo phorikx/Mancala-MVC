@@ -1,16 +1,15 @@
 package mancala.api.models;
 
-public class Player {
-    public Player(mancala.domain.Mancala mancala, 
+public class APIPlayer {
+    public APIPlayer(mancala.domain.Player player, 
             String name, boolean isFirstPlayer) {
 		this.name = name;
 		type = isFirstPlayer ? "player1" : "player2";
-        hasTurn = mancala.isPlayersTurn(isFirstPlayer ? 
-            mancala.PLAYER_ONE : mancala.PLAYER_TWO);
-		this.pits = new Pit[7];
+        hasTurn = player.getTurn();
+		this.pits = new APIPit[7];
 		var firstHole = isFirstPlayer ? 0 : 7;
 		for(int i = 0; i < 7; ++i) {
-			this.pits[i] = new Pit(i + firstHole, mancala.getStonesForPit(i + firstHole));
+			this.pits[i] = new APIPit(i + firstHole, player.getSpecificPit(i).getStones());
 		}
     }
     
@@ -23,6 +22,6 @@ public class Player {
 	boolean hasTurn;
 	public boolean getHasTurn() { return hasTurn; }
 
-	Pit[] pits;
-	public Pit[] getPits() { return pits; }
+	APIPit[] pits;
+	public APIPit[] getPits() { return pits; }
 }
