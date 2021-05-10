@@ -4,7 +4,12 @@
 # Ignore Gradle build output directory
 build
 
+<<<<<<< HEAD
 #Ignore settings from Eclipse
 .settings
 
 node_modules
+=======
+node_modules
+client/node_modules
+>>>>>>> 9f9e
