@@ -18,16 +18,18 @@ public class StartMancala {
 	public Response initialize(
 			@Context HttpServletRequest request, 
 			PlayerInput players) {
-        var mancala = new PlayerImpl();
+        
         String namePlayer1 = players.getNameplayer1();
 		String namePlayer2 = players.getNameplayer2();
+
+		var mancala = new Mancala(new Player(null,null), namePlayer1, namePlayer2);
 		
         HttpSession session = request.getSession(true);
         session.setAttribute("mancala", mancala);
         session.setAttribute("player1", namePlayer1);
         session.setAttribute("player2", namePlayer2);
 
-		var output = new Player(null,null);
+		var output = mancala;
 		return Response.status(200).entity(output).build();
 	}
 }

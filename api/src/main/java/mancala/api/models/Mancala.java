@@ -9,7 +9,7 @@ public class Mancala {
             String namePlayer1, String namePlayer2) {
         players = new APIPlayer[2];
         players[0] = new APIPlayer(player, namePlayer1, true);
-        players[1] = new APIPlayer(player, namePlayer2, false);
+        players[1] = new APIPlayer(player.getOpponent(), namePlayer2, false);
         gameStatus = new GameStatus(player, namePlayer1, namePlayer2);
     }
 

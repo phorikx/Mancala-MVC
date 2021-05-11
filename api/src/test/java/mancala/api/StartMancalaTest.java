@@ -60,7 +60,7 @@ public class StartMancalaTest {
     @Test
     public void startingMancalaSavesTheNewGameInASession() {
         startMancala("Mario", "Luigi");
-        verify(session).setAttribute(eq("mancala"), any(PlayerImpl.class));
+        verify(session).setAttribute(eq("mancala"), any(Mancala.class));
     }
 
     @Test
