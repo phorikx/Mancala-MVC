@@ -9,9 +9,9 @@ type PlayProps = {
 
 export function Play({ gameState, setGameState }: PlayProps) {
     const [errorMessage, setErrorMessage] = useState("");
+    const [playedMove, setPlayedMove] = useState("");
 
-    async function getPitData() {
-
+    async function tryPlayMove(e: React.FormEvent) {
 
     }
 
@@ -53,6 +53,20 @@ export function Play({ gameState, setGameState }: PlayProps) {
                 </tr>
 
             </table>
-        </div>
+
+
+    <form onSubmit={(e) => tryPlayMove(e)}>
+        <input value={playedMove}
+        placeholder="Which Pit do you want to select?"
+        onChange={(e) => setPlayedMove(e.target.value)}
+        />
+
+        <p className="errorMessage">{errorMessage}</p>
+
+        <button className="startGameButton" type="submit">
+            Select Pit!
+            </button>
+     </form>
+     </div>
     )
 }

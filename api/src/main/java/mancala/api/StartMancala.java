@@ -22,14 +22,16 @@ public class StartMancala {
         String namePlayer1 = players.getNameplayer1();
 		String namePlayer2 = players.getNameplayer2();
 
-		var mancala = new Mancala(new Player(null,null), namePlayer1, namePlayer2);
+		var firstPlayer = new Player(null,null);
+
+		var mancala = new Mancala(firstPlayer, namePlayer1, namePlayer2);
 		
         HttpSession session = request.getSession(true);
         session.setAttribute("mancala", mancala);
         session.setAttribute("player1", namePlayer1);
         session.setAttribute("player2", namePlayer2);
+		session.setAttribute("playerObject", firstPlayer);
 
-		var output = mancala;
-		return Response.status(200).entity(output).build();
+		return Response.status(200).entity(mancala).build();
 	}
 }

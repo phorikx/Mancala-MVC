@@ -17,3 +17,8 @@ interface Pit {
     index: number;
     nrOfStones: number;
 }
+
+export interface Move{
+    playerName: string;
+    playerMove: number;
+}

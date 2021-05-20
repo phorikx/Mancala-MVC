@@ -17,10 +17,17 @@ public class PlayMove {
 	@Produces(MediaType.APPLICATION_JSON)
     public Response processmove(
         @Context HttpServletRequest request, 
-        PlayerInput players) {
+        PlayerMove playermove) {
     HttpSession session = request.getSession(false);
 
-    var mancala =session.getAttribute("mancala");   
+    var firstPlayer = session.getAttribute("playerObject");
+    if(playermove.getPlayerName() == session.getAttribute("player1")) {
+        ((Player) firstPlayer).takeTurn(playermove.getPlayerMove());
+    }   else {
+        ((Player) firstPlayer).getOpponent().takeTurn(playermove.getPlayerMove());
+    }
+
+    var mancala = new Mancala( ((Player) firstPlayer), ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
 
     return Response.status(200).entity(mancala).build();
 }
