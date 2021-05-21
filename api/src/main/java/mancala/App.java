@@ -13,19 +13,19 @@ import mancala.api.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Server server = startServer(8080);
+        Server server = startServer(7070);
         ServletContextHandler context = createStatefulContext(server);
         registerServlets(context);
 
         server.start();
         System.out.println("Started server.");
-        System.out.println("Listening on http://localhost:8080/");
+        System.out.println("Listening on http://localhost:7070/");
         System.out.println("Press CTRL+C to exit.");
         server.join();
     }
 
     private static Server startServer(int port) {
-        return new Server(8080);
+        return new Server(7070);
     }
 
     private static ServletContextHandler createStatefulContext(Server server) {

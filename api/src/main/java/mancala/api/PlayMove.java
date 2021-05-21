@@ -20,6 +20,9 @@ public class PlayMove {
         PlayerMove playermove) {
     HttpSession session = request.getSession(false);
 
+    System.out.println(session.getAttribute("player1"));
+    System.out.print("is this activated?");
+
     var firstPlayer = session.getAttribute("playerObject");
     if(playermove.getPlayerName() == session.getAttribute("player1")) {
         ((Player) firstPlayer).takeTurn(playermove.getPlayerMove());
@@ -27,7 +30,7 @@ public class PlayMove {
         ((Player) firstPlayer).getOpponent().takeTurn(playermove.getPlayerMove());
     }
 
-    var mancala = new Mancala( ((Player) firstPlayer), ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
+    Mancala mancala = new Mancala(((Player) firstPlayer), ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
 
     return Response.status(200).entity(mancala).build();
 }
