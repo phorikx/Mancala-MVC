@@ -8,7 +8,6 @@ import jakarta.ws.rs.core.*;
 
 import mancala.api.models.*;
 import mancala.domain.*;
-import mancala.domain.Player;
 
 @Path("/start")
 public class StartMancala {
@@ -22,15 +21,16 @@ public class StartMancala {
         String namePlayer1 = players.getNameplayer1();
 		String namePlayer2 = players.getNameplayer2();
 
-		var firstPlayer = new Player(null,null);
+		var gameMancala = new MancalaImpl();
 
-		var mancala = new Mancala(firstPlayer, namePlayer1, namePlayer2);
+		var mancala = new Mancala(gameMancala, namePlayer1, namePlayer2);
 		
         HttpSession session = request.getSession(true);
         session.setAttribute("mancala", mancala);
         session.setAttribute("player1", namePlayer1);
         session.setAttribute("player2", namePlayer2);
-		session.setAttribute("playerObject", firstPlayer);
+		session.setAttribute("gameMancala", gameMancala);
+		//session.setAttribute("playerObject", firstPlayer);
 
 		return Response.status(200).entity(mancala).build();
 	}

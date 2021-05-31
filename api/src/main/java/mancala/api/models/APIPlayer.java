@@ -9,7 +9,7 @@ public class APIPlayer {
 		this.pits = new APIPit[7];
 		var firstHole = isFirstPlayer ? 0 : 7;
 		for(int i = 0; i < 6; ++i) {
-			this.pits[i] = new APIPit(i + firstHole, player.getSpecificPit(i).getStones());
+			this.pits[i] = new APIPit(i + firstHole, player.getSpecificPit(i+1).getStones());
 		}
 		this.pits[6] = new APIPit(6 + firstHole, player.getKalahaPit().getStones());
     }

@@ -17,22 +17,24 @@ public class PlayMove {
 	@Produces(MediaType.APPLICATION_JSON)
     public Response processmove(
         @Context HttpServletRequest request, 
-        PlayerMove playermove) {
+        PlayerMove playerMove) {
     HttpSession session = request.getSession(false);
 
     System.out.println(session.getAttribute("player1"));
     System.out.print("is this activated?");
+    
+    MancalaImpl gameMancala = (MancalaImpl) session.getAttribute("gameMancala");
 
-    var firstPlayer = session.getAttribute("playerObject");
-    if(playermove.getPlayerName() == session.getAttribute("player1")) {
-        ((Player) firstPlayer).takeTurn(playermove.getPlayerMove());
-    }   else {
-        ((Player) firstPlayer).getOpponent().takeTurn(playermove.getPlayerMove());
-    }
+    int index = playerMove.getPlayerMove();
+    try{
+        gameMancala.playPit(index);
+        Mancala mancala = new Mancala(gameMancala, ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
+        return Response.status(200).entity(mancala).build();
+    } catch(MancalaException e) {
+        Mancala mancala = new Mancala(gameMancala, ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
+        return Response.status(406).entity(mancala).build();
+    }   
 
-    Mancala mancala = new Mancala(((Player) firstPlayer), ((String) session.getAttribute("player1")), ((String) session.getAttribute("player2")));
-
-    return Response.status(200).entity(mancala).build();
 }
     
 }

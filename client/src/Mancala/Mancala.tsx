@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StartGame } from "./StartGame";
 import { Play } from "./Play";
+import { EndOfGame } from "./EndOfGame";
 import type { GameState } from "../gameState";
 import "./Mancala.css";
 
@@ -18,7 +19,11 @@ export function Mancala() {
 
     if (!gameState) {
         return <StartGame setGameState={setGameState} />
+    } else if (!gameState.gameStatus.endOfGame){
+        return <Play gameState={gameState} setGameState={setGameState} />
+    } else{
+        return <EndOfGame gameState={gameState} setGameState={setGameState} />
     }
 
-    return <Play gameState={gameState} setGameState={setGameState} />
+    
 }

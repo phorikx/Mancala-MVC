@@ -8,7 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.ws.rs.core.*;
 
 import mancala.api.models.*;
-import mancala.domain.PlayerImpl;
+import mancala.domain.MancalaImpl;
 
 public class StartMancalaTest {
     @Test
