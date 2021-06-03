@@ -3,6 +3,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'jacoco'
+    id 'net.saliman.cobertura' version '4.0.0'
 }
 
 repositories {
