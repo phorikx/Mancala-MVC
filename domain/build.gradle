@@ -3,7 +3,7 @@ plugins {
     id 'java'
     id 'java-library'
     id 'jacoco'
-    //id 'net.saliman.cobertura' version '4.0.0'
+    id 'net.saliman.cobertura' version '4.0.0'
     //id 'com.github.ksoichiro.console.reporter' version '0.6.2'
 }
 
@@ -42,9 +42,9 @@ jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled true
-        xml.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "jacoco.xml")
+        xml.destination = file("build" + File.separator.toString() + "jacoco" + File.separator.toString() + "jacoco.xml")
         csv.enabled false
-        html.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "html")
+        html.destination = file("build" + File.separator.toString() + "jacoco" + File.separator.toString() + "html")
     }
 }
 
