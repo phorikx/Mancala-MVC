@@ -15,7 +15,7 @@ build:
   image: gradle:jdk11
   script: 
     - gradle wrapper
-    - gradlew build
+    - ./gradlew build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
