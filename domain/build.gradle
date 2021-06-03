@@ -7,6 +7,11 @@ plugins {
     //id 'com.github.ksoichiro.console.reporter' version '0.6.2'
 }
 
+tasks.withType(AbstractArchiveTask) {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
 jacoco {
     toolVersion = "0.8.6"
     reportsDirectory = layout.buildDirectory.dir('/build/jacoco')
@@ -35,9 +40,11 @@ test {
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
     reports {
-        xml.enabled false
+        xml.enabled true
+        html.enabled true
+        xml.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "coverage.xml")
         csv.enabled false
-        html.destination layout.buildDirectory.dir('jacocoHtml').get().asFile
+        html.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "html")
     }
 }
 
