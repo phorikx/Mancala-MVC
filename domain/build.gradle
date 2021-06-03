@@ -3,7 +3,8 @@ plugins {
     id 'java'
     id 'java-library'
     id 'jacoco'
-    id "org.myire.quill.cobertura" version "2.4"
+    id 'net.saliman.cobertura' version '4.0.0'
+    id 'com.github.ksoichiro.console.reporter' version '0.6.2'
 }
 
 repositories {
