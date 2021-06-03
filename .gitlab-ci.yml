@@ -13,7 +13,9 @@ before_script:
 build:
   stage: build
   image: gradle:jdk11
-  script: gradle build
+  script: 
+    - gradle wrapper
+    - gradlew build
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
