@@ -42,7 +42,7 @@ jacocoTestReport {
     reports {
         xml.enabled true
         html.enabled true
-        xml.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "coverage.xml")
+        xml.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "jacoco.xml")
         csv.enabled false
         html.destination = file(getBuildDir().toString() + File.separator.toString() + "jacoco" + File.separator.toString() + "html")
     }
