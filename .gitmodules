@@ -1,0 +1,6 @@
+[submodule "mancala-java-domain-logic"]
+	path = mancala-java-domain-logic
+	url = https://git.sogyo.nl/phorikx/mancala-java-domain-logic.git
+[submodule "web-server-mancala"]
+	path = web-server-mancala
+	url = https://git.sogyo.nl/phorikx/web-server-mancala.git

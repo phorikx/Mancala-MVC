@@ -6,4 +6,4 @@
  */
 
 rootProject.name = 'mancala'
-include('api', 'domain')
+include('mancala-java-domain-logic/domain', 'api')
